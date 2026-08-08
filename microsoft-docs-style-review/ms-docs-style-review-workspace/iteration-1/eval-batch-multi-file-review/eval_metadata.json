@@ -1,0 +1,41 @@
+{
+  "eval_id": 1,
+  "eval_name": "batch-multi-file-review",
+  "prompt": "I've got two Azure documentation files that need a style review against the Microsoft Writing Style Guide. Please review them for style violations, terminology consistency, and common MS doc issues. Generate an HTML report showing all violations with inline previews and suggested fixes.",
+  "files": [
+    "test-docs/getting-started.md",
+    "test-docs/api-reference.md"
+  ],
+  "assertions": [
+    {
+      "text": "Report contains summary dashboard with total violation count",
+      "passed": null,
+      "evidence": null
+    },
+    {
+      "text": "Report includes severity breakdown (errors, warnings, suggestions)",
+      "passed": null,
+      "evidence": null
+    },
+    {
+      "text": "Report shows violations grouped by file with line numbers",
+      "passed": null,
+      "evidence": null
+    },
+    {
+      "text": "Report includes inline previews showing original vs. suggested fix",
+      "passed": null,
+      "evidence": null
+    },
+    {
+      "text": "Report explains why each violation is a style guide violation",
+      "passed": null,
+      "evidence": null
+    },
+    {
+      "text": "HTML is downloadable and viewable in a browser",
+      "passed": null,
+      "evidence": null
+    }
+  ]
+}

@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Microsoft Style Guide Review Report</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; line-height: 1.6; color: #333; background: #f5f5f5; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+        header { background: linear-gradient(135deg, #0078d4 0%, #0063b1 100%); color: white; padding: 30px; border-radius: 8px; margin-bottom: 30px; }
+        h1 { font-size: 2.5em; margin-bottom: 10px; }
+        .header-meta { font-size: 0.95em; opacity: 0.9; }
+        .dashboard { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-bottom: 40px; }
+        .stat-card { background: white; padding: 25px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+        .stat-card h3 { color: #666; font-size: 0.9em; text-transform: uppercase; margin-bottom: 10px; }
+        .stat-number { font-size: 2.5em; font-weight: bold; }
+        .stat-number.error { color: #d13438; }
+        .stat-number.warning { color: #ffd700; }
+        .stat-number.suggestion { color: #0078d4; }
+        .tabs { display: flex; gap: 10px; margin-bottom: 20px; border-bottom: 2px solid #ddd; }
+        .tab { padding: 12px 20px; cursor: pointer; border: none; background: none; font-size: 1em; color: #666; border-bottom: 3px solid transparent; transition: all 0.3s; }
+        .tab.active { color: #0078d4; border-bottom-color: #0078d4; }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+        .violation-item { background: white; padding: 20px; margin-bottom: 15px; border-radius: 8px; border-left: 4px solid #ddd; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+        .violation-item.error { border-left-color: #d13438; }
+        .violation-item.warning { border-left-color: #ffd700; }
+        .violation-item.suggestion { border-left-color: #0078d4; }
+        .violation-header { display: flex; justify-content: space-between; align-items: start; margin-bottom: 15px; }
+        .violation-title { font-weight: 600; font-size: 1.05em; color: #333; }
+        .severity-badge { padding: 4px 12px; border-radius: 20px; font-size: 0.85em; font-weight: 600; text-transform: uppercase; }
+        .severity-badge.error { background: #fde7e9; color: #d13438; }
+        .severity-badge.warning { background: #fff4ce; color: #9c6c00; }
+        .severity-badge.suggestion { background: #dbeafe; color: #0078d4; }
+        .location { color: #666; font-size: 0.9em; margin-bottom: 10px; }
+        .code-comparison { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin: 15px 0; font-family: 'Courier New', monospace; }
+        .code-block { padding: 12px; border-radius: 4px; font-size: 0.9em; overflow-x: auto; }
+        .original { background: #ffefef; border: 1px solid #d13438; color: #d13438; }
+        .suggested { background: #f0f7ff; border: 1px solid #0078d4; color: #0078d4; }
+        .original::before { content: '❌ '; font-weight: bold; }
+        .suggested::before { content: '✓ '; font-weight: bold; }
+        .explanation { background: #f9f9f9; padding: 12px; border-radius: 4px; margin: 10px 0; font-size: 0.95em; border-left: 3px solid #0078d4; }
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-bottom: 30px; }
+        .chart { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+        .rule-bar { display: flex; align-items: center; margin-bottom: 12px; }
+        .rule-name { flex: 0 0 200px; font-size: 0.9em; }
+        .rule-bar-fill { flex: 1; height: 20px; background: linear-gradient(90deg, #0078d4, #00bcf2); border-radius: 3px; margin: 0 10px; }
+        .rule-count { flex: 0 0 40px; text-align: right; font-weight: 600; color: #333; }
+        .summary { background: white; padding: 20px; border-radius: 8px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+        .file-section { margin-bottom: 30px; }
+        .file-header { background: #f0f0f0; padding: 15px; border-radius: 4px; margin-bottom: 15px; font-weight: 600; color: #333; }
+        footer { text-align: center; color: #666; font-size: 0.9em; margin-top: 40px; padding: 20px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📋 Microsoft Style Guide Review</h1>
+            <p class="header-meta">Generated on 2026-08-09 01:49:57 | 31 total violations across 2 file(s)</p>
+        </header>
+
+        <div class="dashboard">
+            <div class="stat-card">
+                <h3>Total Violations</h3>
+                <div class="stat-number">31</div>
+            </div>
+            <div class="stat-card">
+                <h3>Errors</h3>
+                <div class="stat-number error">8</div>
+            </div>
+            <div class="stat-card">
+                <h3>Warnings</h3>
+                <div class="stat-number warning">17</div>
+            </div>
+            <div class="stat-card">
+                <h3>Suggestions</h3>
+                <div class="stat-number suggestion">6</div>
+            </div>
+        </div>
+
+        <div class="tabs">
+            <button class="tab active" onclick="showTab(event, 'findings')">📌 Detailed Findings</button>
+            <button class="tab" onclick="showTab(event, 'stats')">📊 Statistics</button>
+        </div>
+
+        <div id="findings" class="tab-content active">
+<div class="file-section"><div class="file-header">📄 test-docs/api-reference.md (15 issues)</div>
+            <div class="violation-item error">
+                <div class="violation-header">
+                    <div class="violation-title">Jargon & Undefined Terms</div>
+                    <span class="severity-badge error">error</span>
+                </div>
+                <div class="location">Line 1 in test-docs/api-reference.md</div>
+                <div class="code-comparison">
+                    <div class="code-block original"># Azure Storage API Reference</div>
+                    <div class="code-block suggested"># Azure Storage API Reference
+</div>
+                </div>
+                <div class="explanation">💡 Define acronyms on first use. Replace with 'API (Application Programming Interface)'.</div>
+            </div>
+
+            <div class="violation-item error">
+                <div class="violation-header">
+                    <div class="violation-title">Jargon & Undefined Terms</div>
+                    <span class="severity-badge error">error</span>
+                </div>
+                <div class="location">Line 5 in test-docs/api-reference.md</div>
+                <div class="code-comparison">
+                    <div class="code-block original">Azure Storage provides a massively scalable cloud storage solution for data objects. This API reference documents all endpoints, methods, and parameters. For an introduction to Azure storage, see the getting started guide.</div>
+                    <div class="code-block suggested">Azure Storage provides a massively scalable cloud storage solution for data objects. This API reference documents all endpoints, methods, and parameters. For an introduction to Azure storage, see the getting started guide.
+</div>
+                </div>
+                <div class="explanation">💡 Define acronyms on first use. Replace with 'API (Application Programming Interface)'.</div>
+            </div>
+
+            <div class="violation-item warning">
+                <div class="violation-header">
+                    <div class="violation-title">Terminology Consistency</div>
+                    <span class="severity-badge warning">warning</span>
+                </div>
+                <div class="location">Line 9 in test-docs/api-reference.md</div>
+                <div class="code-comparison">
+                    <div class="code-block original">All requests must include an authentication token. The token can be obtained by using the Azure SDK. It's recommended that you store your credentials securely.</div>
+                    <div class="code-block suggested">[Use 'Azure SDK' consistently; found both 'Azure SDK' and 'SDK']</div>
+                </div>
+                <div class="explanation">💡 Terminology consistency: use one term per concept. Choose 'Azure SDK' or 'SDK' and use it throughout.</div>
+            </div>
+
+            <div class="violation-item error">
+                <div class="violation-header">
+                    <div class="violation-title">Capitalization (Product Names)</div>
+                    <span class="severity-badge error">error</span>
+                </div>
+                <div class="location">Line 15 in test-docs/api-reference.md</div>
+                <div class="code-comparison">
+                    <div class="code-block original">1. Create a service principal in azure AD</div>
+                    <div class="code-block suggested">1. Create a service principal in Azure AD
+</div>
+                </div>
+                <div class="explanation">💡 Capitalize Microsoft product names consistently. Use 'Azure AD' on first mention.</div>
+            </div>
+
+            <div class="violation-item warning">
+                <div class="violation-header">
+                    <div class="violation-title">Terminology Consistency</div>
+                    <span class="severity-badge warning">warning</span>
+                </div>
+                <div class="location">Line 17 in test-docs/api-reference.md</div>
+                <div class="code-comparison">
+                    <div class="code-block original">3. Use the SDK to authenticate</div>
+                    <div class="code-block suggested">[Use 'Azure SDK' consistently; found both 'Azure SDK' and 'SDK']</div>
+                </div>
+                <div class="explanation">💡 Terminology consistency: use one term per concept. Choose 'Azure SDK' or 'SDK' and use it throughout.</div>
+            </div>
+
+            <div class="violation-item warning">
+                <div class="violation-header">
+                    <div class="violation-title">Passive Voice</div>
+                    <span class="severity-badge warning">warning</span>
+                </div>
+                <div class="location">Line 19 in test-docs/api-reference.md</div>
+                <div class="code-comparison">
+                    <div class="code-block original">The token is returned by the service and can be used in subsequent requests.</div>
+                    <div class="code-block suggested">[Rewrite in active voice]</div>
+                </div>
+                <div class="explanation">💡 Use active voice (~95% of the time). Make the subject perform the action. Example: 'The user deletes the file' instead of 'The file is deleted by the user.'</div>
+            </div>
+
+            <div class="violation-item warning">
+                <div class="violation-header">
+                    <div class="violation-title">Passive Voice</div>
+                    <span class="severity-badge warning">warning</span>
+                </div>
+                <div class="location">Line 29 in test-docs/api-reference.md</div>
+                <div class="code-comparison">
+                    <div class="code-block original">- `subscriptionId` (string): The subscription identifier. This is required.</div>
+                    <div class="code-block suggested">[Rewrite in active voice]</div>
+                </div>
+                <div class="explanation">💡 Use active voice (~95% of the time). Make the subject perform the action. Example: 'The user deletes the file' instead of 'The file is deleted by the user.'</div>
+            </div>
+
+            <div class="violation-item warning">
+                <div class="violation-header">
+                    <div class="violation-title">Passive Voice</div>
+                    <span class="severity-badge warning">warning</span>
+                </div>
+                <div class="location">Line 30 in test-docs/api-reference.md</div>
+                <div class="code-comparison">
+                    <div class="code-block original">- `resourceGroupName` (string): The name of the resource group. It's important that this is created first.</div>
+                    <div class="code-block suggested">[Rewrite in active voice]</div>
+                </div>
+                <div class="explanation">💡 Use active voice (~95% of the time). Make the subject perform the action. Example: 'The user deletes the file' instead of 'The file is deleted by the user.'</div>
+            </div>
+
+            <div class="violation-item warning">
+                <div class="violation-header">
+                    <div class="violation-title">Code Block Formatting</div>
+                    <span class="severity-badge warning">warning</span>
+                </div>
+                <div class="location">Line 47 in test-docs/api-reference.md</div>
+                <div class="code-comparison">
+                    <div class="code-block original">```</div>
+                    <div class="code-block suggested">```python  # or appropriate language
+</div>
+                </div>
+                <div class="explanation">💡 Specify the language in code fences for syntax highlighting. Example: ```python, ```json, ```csharp.</div>
+            </div>
+
+            <div class="violation-item warning">
+                <div class="violation-header">
+                    <div class="violation-title">Passive Voice</div>
+                    <span class="severity-badge warning">warning</span>
+                </div>
+                <div class="location">Line 49 in test-docs/api-reference.md</div>
+                <div class="code-comparison">
+                    <div class="code-block original">**Response**: A storage account object is returned if the request is successful. The account is provisioned, and you can start using it right away.</div>
+                    <div class="code-block suggested">[Rewrite in active voice]</div>
+                </div>
+                <div class="explanation">💡 Use active voice (~95% of the time). Make the subject perform the action. Example: 'The user deletes the file' instead of 'The file is deleted by the user.'</div>
+            </div>
+
+            <div class="violation-item warning">
+                <div class="violation-header">
+                    <div class="violation-title">Ambiguous Pronouns</div>
+                    <span class="severity-badge warning">warning</span>
+                </div>
+                <div class="location">Line 55 in test-docs/api-reference.md</div>
+                <div class="code-comparison">
+                    <div class="code-block original">This endpoint retrieves all storage accounts in a resource group.</div>
+                    <div class="code-block suggested">[Clarify what 'It'/'This' refers to]</div>
+                </div>
+                <div class="explanation">💡 Avoid pronouns without clear antecedents. Example: 'Install the SDK. The SDK requires .NET 6' instead of 'Install the SDK. It requires .NET 6.'</div>
+            </div>
+
+            <div class="violation-item error">
+                <div class="violation-header">
+                    <div class="violation-title">Jargon & Undefined Terms</div>
+                    <span class="severity-badge error">error</span>
+                </div>
+                <div class="location">Line 66 in test-docs/api-reference.md</div>
+                <div class="code-comparison">
+                    <div class="code-block original">The API returns the following error codes:</div>
+                    <div class="code-block suggested">The API returns the following error codes:
+</div>
+                </div>
+                <div class="explanation">💡 Define acronyms on first use. Replace with 'API (Application Programming Interface)'.</div>
+            </div>
+
+            <div class="violation-item warning">
+                <div class="violation-header">
+                    <div class="violation-title">Passive Voice</div>
+                    <span class="severity-badge warning">warning</span>
+                </div>
+                <div class="location">Line 70 in test-docs/api-reference.md</div>
+                <div class="code-comparison">
+                    <div class="code-block original">- `403` – Access is denied</div>
+                    <div class="code-block suggested">[Rewrite in active voice]</div>
+                </div>
+                <div class="explanation">💡 Use active voice (~95% of the time). Make the subject perform the action. Example: 'The user deletes the file' instead of 'The file is deleted by the user.'</div>
+            </div>
+
+            <div class="violation-item suggestion">
+                <div class="violation-header">
+                    <div class="violation-title">Contractions</div>
+                    <span class="severity-badge suggestion">suggestion</span>
+                </div>
+                <div class="location">Line 71 in test-docs/api-reference.md</div>
+                <div class="code-comparison">
+                    <div class="code-block original">- `404` – The resource cannot be found</div>
+                    <div class="code-block suggested">- `404` – The resource can't be found
+</div>
+                </div>
+                <div class="explanation">💡 Use 'can't' to sound conversational. Formal tone avoids contractions, but Microsoft style guide recommends them for approachability.</div>
+            </div>
+
+            <div class="violation-item warning">
+                <div class="violation-header">
+                    <div class="violation-title">Passive Voice</div>
+                    <span class="severity-badge warning">warning</span>
+                </div>
+                <div class="location">Line 88 in test-docs/api-reference.md</div>
+                <div class="code-comparison">
+                    <div class="code-block original">**Note**: The old authentication method (using connection strings) is deprecated and shouldn't be used. Use managed identities instead. The legacy endpoint `/api/v1/` is no longer supported and will be removed in Q4 2025.</div>
+                    <div class="code-block suggested">[Rewrite in active voice]</div>
+                </div>
+                <div class="explanation">💡 Use active voice (~95% of the time). Make the subject perform the action. Example: 'The user deletes the file' instead of 'The file is deleted by the user.'</div>
+            </div>
+</div><div class="file-section"><div class="file-header">📄 test-docs/getting-started.md (16 issues)</div>
+            <div class="violation-item error">
+                <div class="violation-header">
+                    <div class="violation-title">Capitalization (Product Names)</div>
+                    <span class="severity-badge error">error</span>
+                </div>
+                <div class="location">Line 3 in test-docs/getting-started.md</div>
+                <div class="code-comparison">
+                    <div class="code-block original">Welcome! We're excited to help you get started with azure devops. This guide will walk you through the basic setup and configuration steps.</div>
+                    <div class="code-block suggested">Welcome! We're excited to help you get started with Azure DevOps. This guide will walk you through the basic setup and configuration steps.
+</div>
+                </div>
+                <div class="explanation">💡 Capitalize Microsoft product names consistently. Use 'Azure DevOps' on first mention.</div>
+            </div>
+
+            <div class="violation-item error">
+                <div class="violation-header">
+                    <div class="violation-title">Capitalization (Product Names)</div>
+                    <span class="severity-badge error">error</span>
+                </div>
+                <div class="location">Line 20 in test-docs/getting-started.md</div>
+                <div class="code-comparison">
+                    <div class="code-block original">1. download the azure sdk from the official website</div>
+                    <div class="code-block suggested">1. download the Azure SDK from the official website
+</div>
+                </div>
+                <div class="explanation">💡 Capitalize Microsoft product names consistently. Use 'Azure SDK' on first mention.</div>
+            </div>
+
+            <div class="violation-item warning">
+                <div class="violation-header">
+                    <div class="violation-title">Terminology Consistency</div>
+                    <span class="severity-badge warning">warning</span>
+                </div>
+                <div class="location">Line 20 in test-docs/getting-started.md</div>
+                <div class="code-comparison">
+                    <div class="code-block original">1. download the azure sdk from the official website</div>
+                    <div class="code-block suggested">[Use 'Azure SDK' consistently; found both 'Azure SDK' and 'SDK']</div>
+                </div>
+                <div class="explanation">💡 Terminology consistency: use one term per concept. Choose 'Azure SDK' or 'SDK' and use it throughout.</div>
+            </div>
+
+            <div class="violation-item warning">
+                <div class="violation-header">
+                    <div class="violation-title">Numbered List Format</div>
+                    <span class="severity-badge warning">warning</span>
+                </div>
+                <div class="location">Line 20 in test-docs/getting-started.md</div>
+                <div class="code-comparison">
+                    <div class="code-block original">1. download the azure sdk from the official website</div>
+                    <div class="code-block suggested">1. download the azure sdk from the official website</div>
+                </div>
+                <div class="explanation">💡 List items should start with a capital letter.</div>
+            </div>
+
+            <div class="violation-item warning">
+                <div class="violation-header">
+                    <div class="violation-title">Numbered List Format</div>
+                    <span class="severity-badge warning">warning</span>
+                </div>
+                <div class="location">Line 24 in test-docs/getting-started.md</div>
+                <div class="code-comparison">
+                    <div class="code-block original">5. verify the installation by running `az --version`</div>
+                    <div class="code-block suggested">5. verify the installation by running `az --version`</div>
+                </div>
+                <div class="explanation">💡 List items should start with a capital letter.</div>
+            </div>
+
+            <div class="violation-item warning">
+                <div class="violation-header">
+                    <div class="violation-title">Passive Voice</div>
+                    <span class="severity-badge warning">warning</span>
+                </div>
+                <div class="location">Line 26 in test-docs/getting-started.md</div>
+                <div class="code-comparison">
+                    <div class="code-block original">The installation is performed by running a single command in your terminal. It can be done in order to set up your environment quickly.</div>
+                    <div class="code-block suggested">[Rewrite in active voice]</div>
+                </div>
+                <div class="explanation">💡 Use active voice (~95% of the time). Make the subject perform the action. Example: 'The user deletes the file' instead of 'The file is deleted by the user.'</div>
+            </div>
+
+            <div class="violation-item suggestion">
+                <div class="violation-header">
+                    <div class="violation-title">Wordy Phrases</div>
+                    <span class="severity-badge suggestion">suggestion</span>
+                </div>
+                <div class="location">Line 26 in test-docs/getting-started.md</div>
+                <div class="code-comparison">
+                    <div class="code-block original">The installation is performed by running a single command in your terminal. It can be done in order to set up your environment quickly.</div>
+                    <div class="code-block suggested">The installation is performed by running a single command in your terminal. It can be done to set up your environment quickly.
+</div>
+                </div>
+                <div class="explanation">💡 Replace 'in order to' with 'to' for brevity and clarity.</div>
+            </div>
+
+            <div class="violation-item suggestion">
+                <div class="violation-header">
+                    <div class="violation-title">Wordy Phrases</div>
+                    <span class="severity-badge suggestion">suggestion</span>
+                </div>
+                <div class="location">Line 32 in test-docs/getting-started.md</div>
+                <div class="code-comparison">
+                    <div class="code-block original">- API key configuration (in order to authenticate requests)</div>
+                    <div class="code-block suggested">- API key configuration (to authenticate requests)
+</div>
+                </div>
+                <div class="explanation">💡 Replace 'in order to' with 'to' for brevity and clarity.</div>
+            </div>
+
+            <div class="violation-item error">
+                <div class="violation-header">
+                    <div class="violation-title">Jargon & Undefined Terms</div>
+                    <span class="severity-badge error">error</span>
+                </div>
+                <div class="location">Line 32 in test-docs/getting-started.md</div>
+                <div class="code-comparison">
+                    <div class="code-block original">- API key configuration (in order to authenticate requests)</div>
+                    <div class="code-block suggested">- API key configuration (in order to authenticate requests)
+</div>
+                </div>
+                <div class="explanation">💡 Define acronyms on first use. Replace with 'API (Application Programming Interface)'.</div>
+            </div>
+
+            <div class="violation-item warning">
+                <div class="violation-header">
+                    <div class="violation-title">Ambiguous Pronouns</div>
+                    <span class="severity-badge warning">warning</span>
+                </div>
+                <div class="location">Line 36 in test-docs/getting-started.md</div>
+                <div class="code-comparison">
+                    <div class="code-block original">These configurations are important, many developers skip this step.</div>
+                    <div class="code-block suggested">[Clarify what 'It'/'This' refers to]</div>
+                </div>
+                <div class="explanation">💡 Avoid pronouns without clear antecedents. Example: 'Install the SDK. The SDK requires .NET 6' instead of 'Install the SDK. It requires .NET 6.'</div>
+            </div>
+
+            <div class="violation-item suggestion">
+                <div class="violation-header">
+                    <div class="violation-title">Vague Quantifiers</div>
+                    <span class="severity-badge suggestion">suggestion</span>
+                </div>
+                <div class="location">Line 36 in test-docs/getting-started.md</div>
+                <div class="code-comparison">
+                    <div class="code-block original">These configurations are important, many developers skip this step.</div>
+                    <div class="code-block suggested">These configurations are important, [specific number/percentage] developers skip this step.
+</div>
+                </div>
+                <div class="explanation">💡 Replace vague 'many' with specific numbers or percentages for clarity.</div>
+            </div>
+
+            <div class="violation-item suggestion">
+                <div class="violation-header">
+                    <div class="violation-title">Vague Quantifiers</div>
+                    <span class="severity-badge suggestion">suggestion</span>
+                </div>
+                <div class="location">Line 42 in test-docs/getting-started.md</div>
+                <div class="code-comparison">
+                    <div class="code-block original">Our team has created some sample code that you can use as a starting point. It provides examples of common use cases such as, creating resources, querying data, and managing permissions.</div>
+                    <div class="code-block suggested">Our team has created [specific number/percentage] sample code that you can use as a starting point. It provides examples of common use cases such as, creating resources, querying data, and managing permissions.
+</div>
+                </div>
+                <div class="explanation">💡 Replace vague 'some' with specific numbers or percentages for clarity.</div>
+            </div>
+
+            <div class="violation-item suggestion">
+                <div class="violation-header">
+                    <div class="violation-title">Second Person Voice</div>
+                    <span class="severity-badge suggestion">suggestion</span>
+                </div>
+                <div class="location">Line 48 in test-docs/getting-started.md</div>
+                <div class="code-comparison">
+                    <div class="code-block original">If the setup fails, it's probably because the configuration wasn't right. Check the logs for details. This solution requires that you have administrator access to your machine.</div>
+                    <div class="code-block suggested">If the setup fails, it's probably because the configuration wasn't right. Check the logs for details. This solution requires that you have you access to your machine.
+</div>
+                </div>
+                <div class="explanation">💡 Use second-person 'you' instead of third-person. More conversational and direct.</div>
+            </div>
+
+            <div class="violation-item warning">
+                <div class="violation-header">
+                    <div class="violation-title">Terminology Consistency</div>
+                    <span class="severity-badge warning">warning</span>
+                </div>
+                <div class="location">Line 52 in test-docs/getting-started.md</div>
+                <div class="code-comparison">
+                    <div class="code-block original">- The SDK can't find the API key – make sure it's set in your environment variables</div>
+                    <div class="code-block suggested">[Use 'Azure SDK' consistently; found both 'Azure SDK' and 'SDK']</div>
+                </div>
+                <div class="explanation">💡 Terminology consistency: use one term per concept. Choose 'Azure SDK' or 'SDK' and use it throughout.</div>
+            </div>
+
+            <div class="violation-item error">
+                <div class="violation-header">
+                    <div class="violation-title">Jargon & Undefined Terms</div>
+                    <span class="severity-badge error">error</span>
+                </div>
+                <div class="location">Line 52 in test-docs/getting-started.md</div>
+                <div class="code-comparison">
+                    <div class="code-block original">- The SDK can't find the API key – make sure it's set in your environment variables</div>
+                    <div class="code-block suggested">- The SDK can't find the API key – make sure it's set in your environment variables
+</div>
+                </div>
+                <div class="explanation">💡 Define acronyms on first use. Replace with 'API (Application Programming Interface)'.</div>
+            </div>
+
+            <div class="violation-item warning">
+                <div class="violation-header">
+                    <div class="violation-title">Passive Voice</div>
+                    <span class="severity-badge warning">warning</span>
+                </div>
+                <div class="location">Line 53 in test-docs/getting-started.md</div>
+                <div class="code-comparison">
+                    <div class="code-block original">- The connection is refused – this usually means the endpoint is unreachable</div>
+                    <div class="code-block suggested">[Rewrite in active voice]</div>
+                </div>
+                <div class="explanation">💡 Use active voice (~95% of the time). Make the subject perform the action. Example: 'The user deletes the file' instead of 'The file is deleted by the user.'</div>
+            </div>
+</div>
+        </div>
+
+        <div id="stats" class="tab-content">
+            <div class="summary">
+                <h2>Review Summary</h2>
+                <p><strong>Files reviewed:</strong> 2</p>
+                <p><strong>Total violations:</strong> 31</p>
+                <p><strong>Most common issues:</strong></p>
+            </div>
+            <div class="chart">
+                <h3>Top 10 Violation Types</h3>
+
+                <div class="rule-bar">
+                    <div class="rule-name">Passive Voice</div>
+                    <div class="rule-bar-fill" style="width: 100.0%;"></div>
+                    <div class="rule-count">8</div>
+                </div>
+
+                <div class="rule-bar">
+                    <div class="rule-name">Jargon & Undefined Terms</div>
+                    <div class="rule-bar-fill" style="width: 62.5%;"></div>
+                    <div class="rule-count">5</div>
+                </div>
+
+                <div class="rule-bar">
+                    <div class="rule-name">Terminology Consistency</div>
+                    <div class="rule-bar-fill" style="width: 50.0%;"></div>
+                    <div class="rule-count">4</div>
+                </div>
+
+                <div class="rule-bar">
+                    <div class="rule-name">Capitalization (Product Names)</div>
+                    <div class="rule-bar-fill" style="width: 37.5%;"></div>
+                    <div class="rule-count">3</div>
+                </div>
+
+                <div class="rule-bar">
+                    <div class="rule-name">Numbered List Format</div>
+                    <div class="rule-bar-fill" style="width: 25.0%;"></div>
+                    <div class="rule-count">2</div>
+                </div>
+
+                <div class="rule-bar">
+                    <div class="rule-name">Ambiguous Pronouns</div>
+                    <div class="rule-bar-fill" style="width: 25.0%;"></div>
+                    <div class="rule-count">2</div>
+                </div>
+
+                <div class="rule-bar">
+                    <div class="rule-name">Wordy Phrases</div>
+                    <div class="rule-bar-fill" style="width: 25.0%;"></div>
+                    <div class="rule-count">2</div>
+                </div>
+
+                <div class="rule-bar">
+                    <div class="rule-name">Vague Quantifiers</div>
+                    <div class="rule-bar-fill" style="width: 25.0%;"></div>
+                    <div class="rule-count">2</div>
+                </div>
+
+                <div class="rule-bar">
+                    <div class="rule-name">Second Person Voice</div>
+                    <div class="rule-bar-fill" style="width: 12.5%;"></div>
+                    <div class="rule-count">1</div>
+                </div>
+
+                <div class="rule-bar">
+                    <div class="rule-name">Contractions</div>
+                    <div class="rule-bar-fill" style="width: 12.5%;"></div>
+                    <div class="rule-count">1</div>
+                </div>
+
+            </div>
+        </div>
+
+        <footer>
+            <p>This report was generated using the Microsoft Writing Style Guide. For more information, visit <a href="https://learn.microsoft.com/en-us/style-guide" target="_blank">Microsoft Style Guide</a>.</p>
+            <p>💼 Generated by Microsoft Docs Style & Terminology Review Skill</p>
+        </footer>
+    </div>
+
+    <script>
+        function showTab(evt, tabName) {
+            var i, tabcontent, tabs;
+            tabcontent = document.getElementsByClassName("tab-content");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].classList.remove("active");
+            }
+            tabs = document.getElementsByClassName("tab");
+            for (i = 0; i < tabs.length; i++) {
+                tabs[i].classList.remove("active");
+            }
+            document.getElementById(tabName).classList.add("active");
+            evt.currentTarget.classList.add("active");
+        }
+    </script>
+</body>
+</html>

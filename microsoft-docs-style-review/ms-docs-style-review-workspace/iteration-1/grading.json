@@ -1,0 +1,36 @@
+{
+  "eval_id": 1,
+  "eval_name": "batch-multi-file-review",
+  "expectations": [
+    {
+      "text": "Report contains summary dashboard with total violation count",
+      "passed": true,
+      "evidence": "Dashboard displays '31' total violations with timestamp"
+    },
+    {
+      "text": "Report includes severity breakdown (errors, warnings, suggestions)",
+      "passed": true,
+      "evidence": "Dashboard shows: 8 Errors (red), 17 Warnings (yellow), 6 Suggestions (blue)"
+    },
+    {
+      "text": "Report shows violations grouped by file with line numbers",
+      "passed": true,
+      "evidence": "Violations organized by file (api-reference.md, getting-started.md) with 'Line X' location"
+    },
+    {
+      "text": "Report includes inline previews showing original vs. suggested fix",
+      "passed": true,
+      "evidence": "Two-column layout with original text (red/❌) and suggested fix (blue/✓) side-by-side"
+    },
+    {
+      "text": "Report explains why each violation is a style guide violation",
+      "passed": true,
+      "evidence": "Each violation includes explanation tied to Microsoft style guide rules (e.g., 'Use active voice ~95% of the time')"
+    },
+    {
+      "text": "HTML is downloadable and viewable in a browser",
+      "passed": true,
+      "evidence": "37KB HTML file generated, self-contained with inline CSS and JavaScript, no external dependencies"
+    }
+  ]
+}

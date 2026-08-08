@@ -1,0 +1,33 @@
+{
+  "skill_name": "microsoft-docs-style-and-terminology-review",
+  "evals": [
+    {
+      "id": 1,
+      "eval_name": "batch-multi-file-review",
+      "prompt": "I've got two Azure documentation files that need a style review against the Microsoft Writing Style Guide. Please review them for style violations, terminology consistency, and common MS doc issues. Generate an HTML report showing all violations with inline previews and suggested fixes.",
+      "expected_output": "An HTML report with summary dashboard showing total violations by severity, detailed findings for each file with line numbers, inline previews of violations paired with suggested rewrites, and actionable severity levels",
+      "files": [
+        "test-docs/getting-started.md",
+        "test-docs/api-reference.md"
+      ]
+    },
+    {
+      "id": 2,
+      "eval_name": "single-file-focused-review",
+      "prompt": "I'm a technical editor preparing API reference documentation. I want to check it for passive voice, capitalization of product names, terminology consistency, and jargon clarity. Can you generate a review report that shows exactly what needs to be fixed?",
+      "expected_output": "An HTML report focused on the most impactful violations with clear before/after examples and explanations tied to Microsoft Writing Style Guide rules",
+      "files": [
+        "test-docs/api-reference.md"
+      ]
+    },
+    {
+      "id": 3,
+      "eval_name": "editorial-handoff-report",
+      "prompt": "Our getting-started guide needs an audit for clarity, tone, and MS style compliance before we publish. Please review and provide a report I can hand off to writers showing what needs correcting, with concrete suggestions for each issue.",
+      "expected_output": "An HTML report with exportable findings, actionable suggestions for each violation, severity breakdown chart, and clear explanations of why each violates Microsoft style",
+      "files": [
+        "test-docs/getting-started.md"
+      ]
+    }
+  ]
+}
