@@ -1,6 +1,6 @@
 # Microsoft Docs Style & Terminology Review Skill
 
-A Claude Code skill for reviewing Microsoft technical documentation against the Microsoft Writing Style Guide. Generates detailed HTML reports with inline previews and concrete rewrite suggestions.
+A Claude Code skill for reviewing technical documentation against the Microsoft Writing Style Guide. Generates detailed HTML reports with inline previews and concrete rewrite suggestions.
 
 ## Quick Start
 
